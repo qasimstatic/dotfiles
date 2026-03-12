@@ -1,0 +1,8 @@
+ls
+z nushell
+cd ~/.config/nushell
+nvim env.nu
+cd ~/k
+cd ~/.config/nushell
+ls
+nvim env.nu

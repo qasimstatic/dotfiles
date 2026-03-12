@@ -1,0 +1,62 @@
+# =============================================================================
+# Appearance & Theme
+# =============================================================================
+theme = Catppuccin Mocha
+background-opacity = 0.80
+background = #000000
+
+gtk-custom-css = ?"~/.config/ghostty/overrides.css"
+
+# =============================================================================
+# Fonts
+# =============================================================================
+font-family = Monaspace Neon NF SemiBold
+font-family-italic = Monaspace Radon NF SemiBold
+font-size = 15
+
+adjust-cell-height = 10%
+font-feature = "ss01,ss02,ss03,ss04,ss05,ss06,ss07,ss08,ss09,liga,calt"
+
+# =============================================================================
+# Window & Rendering
+# =============================================================================
+window-decoration = false
+window-padding-x = 14
+window-padding-y = 14
+confirm-close-surface = false
+resize-overlay = never
+
+gtk-toolbar-style = flat
+gtk-wide-tabs = true
+
+# =============================================================================
+# Performance & Daemon Mode
+# =============================================================================
+gtk-single-instance = true
+quit-after-last-window-closed = false
+
+# =============================================================================
+# Terminal & Input behavior
+# =============================================================================
+# Keeping only ssh-env to allow custom Nushell window titles
+shell-integration-features = ssh-env
+
+cursor-style = block
+cursor-style-blink = false
+mouse-scroll-multiplier = 0.95
+mouse-hide-while-typing = true
+
+# =============================================================================
+# Keybinds & Includes
+# =============================================================================
+keybind = shift+insert=paste_from_clipboard
+keybind = control+insert=copy_to_clipboard
+keybind = shift+enter=text:\x1b\r
+
+keybind = super+control+shift+alt+arrow_down=resize_split:down,100
+keybind = super+control+shift+alt+arrow_up=resize_split:up,100
+keybind = super+control+shift+alt+arrow_left=resize_split:left,100
+keybind = super+control+shift+alt+arrow_right=resize_split:right,100
+
+config-file = ?"~/.config/ghostty/tabs.conf"
+# config-file = ?"~/.config/ghostty/vim.conf"

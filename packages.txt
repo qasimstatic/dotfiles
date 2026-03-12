@@ -1,0 +1,56 @@
+# Core Shell & Prompt
+nushell
+starship
+zoxide
+vivid
+
+# Terminal & WM
+ghostty
+hyprland
+waybar
+fuzzel
+cliphist
+wl-clipboard
+grimblast  # screenshot tool from hyprland community
+
+# Editor & File Managers
+neovim
+joshuto  # TUI file manager (vim bindings)
+
+# Music & Audio
+rmpc
+mpd
+playerctl
+
+# TUI Utilities (ANSI themed, vim bindings)
+eza  # ls replacement
+bat  # cat replacement with syntax highlighting
+fzf  # fuzzy finder
+ripgrep
+fd
+btop  # system monitor (better htop)
+ncdu  # disk usage
+jq  # JSON processor
+yq  # YAML processor
+httpie  # HTTP client
+dog  # DNS client
+
+# Dev Tools
+tmux
+lazygit
+gitui
+delta  # git pager
+glow  # markdown viewer
+tokei  # code statistics
+
+# System Tools
+brightnessctl
+pamixer  # pulseaudio mixer
+wireplumber
+pipewire
+pipewire-pulse
+pipewire-alsa
+
+# Extras
+carapace-bin
+catppuccin-sddm-theme

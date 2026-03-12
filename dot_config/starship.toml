@@ -1,0 +1,97 @@
+add_newline = true
+command_timeout = 1000
+
+# Minimal left side: Directory, Git Branch, and the prompt character
+format = """
+$directory $git_branch
+$character
+"""
+
+# Right side for all other context
+right_format = """
+ $git_status$git_metrics$cmd_duration$c$cmake$rust$nodejs$python$aws
+"""
+
+[character]
+success_symbol = "[➜](bold green)"
+error_symbol = "[➜](bold red)"
+
+# [directory]
+# style = "blue"
+# format = "[$path]($style) "
+# truncation_length = 3
+# truncation_symbol = "…/"
+
+[directory]
+home_symbol = "~ "
+truncation_length = 2
+truncation_symbol = "󰝣 "
+read_only = " "
+use_os_path_sep = true
+style = "bold blue"
+format = '[$path]($style)[$read_only]($read_only_style)'
+repo_root_style = 'bold blue'
+repo_root_format = '[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) [󰔷](bold bright-blue)'
+
+# Example substitution from Omerxxx's config
+[directory.substitutions]
+'~/.learning' = ''
+'~/Projects' = ''
+'~/.journal' = ''
+
+[git_branch]
+format = "[$symbol$branch]($style) "
+symbol = " "
+style = "red"
+
+# --- The best of your git modules, moved to the right ---
+
+[git_status]
+style = "text"
+format = "([⎪$all_status⎥]($style))"
+stashed = "[◃](yellow)"
+modified = "[●](peach)"
+staged = "[▪](green)"
+untracked = "[◌](blue)"
+deleted = "[✕](red)"
+conflicted = "[◪](red)"
+
+[git_metrics]
+format = '([▴$added]($added_style))([▿$deleted]($deleted_style)) '
+added_style = 'green'
+deleted_style = 'red'
+disabled = false
+
+# --- Essential language and tool info ---
+
+[c]
+format = " via [ $version](bold cyan)"
+version_format = "${raw}"
+symbol = " "
+
+[cmake]
+format = " via [ $version](bold blue)"
+symbol = " "
+
+[rust]
+format = " via [ $version](bold red)"
+symbol = " "
+
+[nodejs]
+format = " via [ $version](bold green)"
+version_format = "${raw}"
+
+[python]
+format = " via [ $version](bold yellow)"
+version_format = "${raw}"
+
+[aws]
+format = '[$symbol$profile]($style) '
+style = 'bold blue'
+symbol = " "
+
+[cmd_duration]
+format = "[◄ $duration]($style) "
+style = "overlay0"
+
+

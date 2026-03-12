@@ -1,0 +1,17 @@
+# chezmoi ignore patterns
+*.sqlite3
+*.sqlite3-*
+*.wal
+*.lock
+lazy-lock.json
+.history/
+.cache/
+
+# Environment files with secrets
+env.nu
+.env
+.env.*
+*.secret
+*_secret*
+credentials.*
+api_keys.*

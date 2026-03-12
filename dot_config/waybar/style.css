@@ -1,0 +1,94 @@
+@import "mocha.css";
+
+* {
+  min-height: 0;
+  min-width: 0;
+  font-family: MonaspiceNe NFP;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+window#waybar {
+  /* background-color: transparent; */
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+#workspaces button {
+  padding: 0.3rem 0.6rem;
+  margin: 0.4rem 0.25rem;
+  border-radius: 0px;
+  background-color: @mauve;
+  color: @crust;
+}
+
+#workspaces button:hover {
+  color: @crust;
+  background-color: @text;
+}
+
+#workspaces button.active {
+  color: @crust;
+  background-color: @green;
+}
+
+#workspaces button.urgent {
+  background-color: @red;
+  color: @crust;
+}
+
+#clock,
+#tray,
+#network,
+#pulseaudio,
+#cpu,
+#memory,
+#backlight,
+#window,
+#battery {
+  padding: 0.3rem 0.6rem;
+  margin: 0.4rem 0.25rem;
+  border-radius: 0px;
+  color: @crust;
+}
+
+#network {
+  background-color: @sky;
+}
+
+#cpu {
+  background-color: @blue;
+}
+
+#memory {
+  background-color: @teal;
+}
+
+#clock {
+  font-family: MonaspiceRn NFP;
+  background-color: @rosewater;
+}
+
+#window {
+  background-color: transparent;
+  color: @green;
+}
+
+#pulseaudio {
+  background-color: @lavender;
+}
+
+#pulseaudio.muted {
+  background-color: @overlay0;
+}
+
+#backlight {
+  background-color: @yellow;
+}
+
+#battery {
+  background-color: @green;
+}
+
+tooltip {
+  background-color: @mantle;
+}

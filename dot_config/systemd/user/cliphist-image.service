@@ -1,0 +1,13 @@
+[Unit]
+Description=Clipboard history daemon for images (cliphist)
+After=graphical-session.target
+PartOf=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/wl-paste --type image --watch /usr/bin/cliphist store
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=graphical-session.target

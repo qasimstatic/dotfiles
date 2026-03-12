@@ -1,0 +1,40 @@
+tabbar tabboxchild tab {
+  margin: 4px;
+  min-height: 0px;
+  padding: 2px;
+  border-radius: 0px;
+  background-image: none;
+  box-shadow: none;
+  background-color: #cba6f7;
+  color: #000000;
+}
+
+tabbar tabboxchild tab widget.tab-title,
+tabbar tabboxchild tab widget.tab-title * {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+tabbar tabboxchild tab:checked,
+tabbar tabboxchild tab:selected {
+  border-radius: 0px;
+  background-image: none;
+  box-shadow: none;
+  background-color: #a6e3a1;
+  color: #000000;
+}
+
+tabbar tabboxchild tab button.tab-close-button {
+  min-width: 0px;
+  min-height: 0px;
+  padding: 0px;
+  margin: 0px;
+  border-width: 0px;
+  background: none;
+  box-shadow: none;
+}
+
+tabbar tabboxchild tab button.tab-close-button image {
+  opacity: 0;
+  -gtk-icon-size: 0px;
+}

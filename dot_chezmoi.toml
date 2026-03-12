@@ -1,0 +1,14 @@
+[data]
+    email = "qasim@codeberg.org"
+
+[source]
+    type = "file"
+    path = "~/.local/share/chezmoi"
+
+[diff]
+    exclude = [
+        "*.sqlite3*",
+        "*.wal",
+        "*.lock",
+        "lazy-lock.json",
+    ]
