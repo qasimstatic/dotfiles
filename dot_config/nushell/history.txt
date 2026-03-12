@@ -6,3 +6,6 @@ cd ~/k
 cd ~/.config/nushell
 ls
 nvim env.nu
+hyprlock
+ls
+rmpc

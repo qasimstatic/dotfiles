@@ -100,7 +100,6 @@ $env.config = {
 source tools/atuin.nu
 source tools/zoxide.nu
 source tools/journal.nu
-source tools/webread.nu
 source tools/pomodoro.nu
 source tools/dots.nu
 
