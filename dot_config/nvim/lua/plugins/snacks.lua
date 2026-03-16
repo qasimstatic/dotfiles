@@ -30,9 +30,15 @@ return {
         },
       },
     },
+    git = { enabled = true },
     indent = { enabled = true },
+    picker = { enabled = true },
     quickfile = { enabled = true },
-    statuscolumn = { enabled = true },
+    statuscolumn = {
+      enabled = true,
+      left = { "sign", "mark" },
+      right = { "git", "diagnostic" },
+    },
   },
   keys = {
     { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },

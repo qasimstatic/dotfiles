@@ -133,6 +133,7 @@
   "pulseaudio": {
     // "format": "{icon} {volume}%",
     "format": "{icon}",
+    "tooltip-format": "{volume}%",
     "format-muted": "󰖁 Muted",
     "format-icons": {
       "headphone": "󰋋",

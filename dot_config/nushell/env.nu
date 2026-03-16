@@ -23,6 +23,11 @@ if ($cargo_bin | path exists) {
   $env.PATH = ($env.PATH | prepend $cargo_bin)
 }
 
+# Add Go binaries
+let go_path = ("~/go/bin" | path expand)
+if ($go_path | path exists) {
+  $env.PATH = ($env.PATH | prepend $go_path)
+}
 
 # UI tweaks
 $env.GTK_ENABLE_ANIMATIONS = "0"

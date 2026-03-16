@@ -1,10 +1,3 @@
--- LSP disabled by default. Enable with: LSP_ENABLED=1 nvim
-
-local enabled = os.getenv("LSP_ENABLED") ~= nil
-if not enabled then
-	return {}
-end
-
 return {
 	{
 		"VonHeikemen/lsp-zero.nvim",
@@ -16,6 +9,7 @@ return {
 		},
 		config = function()
 			local lsp_zero = require("lsp-zero")
+			lsp_zero.extend_lspconfig() -- diagnostics enabled by default
 
 			lsp_zero.on_attach(function(client, bufnr)
 				local opts = { buffer = bufnr }
@@ -28,9 +22,14 @@ return {
 
 			require("mason").setup({})
 			require("mason-lspconfig").setup({
-				ensure_installed = { "clangd", "codelldb", "lua_ls", "rust_analyzer", "zls" },
+				ensure_installed = { "clangd", "lua_ls", "rust_analyzer", "zls" },
 				handlers = {
 					lsp_zero.default_setup,
+					["clangd"] = function()
+						require("lspconfig").clangd.setup({
+							cmd = { "clangd", "--fallback-style=llvm", "--header-insertion=never", "--compile-commands-dir=." },
+						})
+					end,
 				},
 			})
 		end,

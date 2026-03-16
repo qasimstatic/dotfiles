@@ -1,21 +1,21 @@
 # Dotfiles
 
 <p align="center">
-  <img src="thumbnails/thumb0.png" alt="Desktop overview"/>
+  <img src="thumbnails/thumbnail0.png" alt="Desktop overview"/>
 </p>
 
 ## Preview
 
 <table align="center">
   <tr>
-    <td><img src="thumbnails/thumb1.png" alt="Fuzzel launcher"></td>
-    <td><img src="thumbnails/thumb2.png" alt="Ghostty terminal"></td>
-    <td><img src="thumbnails/thumb3.png" alt="Joshuto file manager"></td>
+    <td><img src="thumbnails/thumbnail1.png" alt="Fuzzel launcher"></td>
+    <td><img src="thumbnails/thumbnail2.png" alt="Ghostty terminal"></td>
+    <td><img src="thumbnails/thumbnail3.png" alt="Joshuto file manager"></td>
   </tr>
   <tr>
-    <td><img src="thumbnails/thumb4.png" alt="Nushell shell"></td>
-    <td><img src="thumbnails/thumb5.png" alt="Neovim editor"></td>
-    <td><img src="thumbnails/thumb6.png" alt="Rmpc music player"></td>
+    <td><img src="thumbnails/thumbnail4.png" alt="Nushell shell"></td>
+    <td><img src="thumbnails/thumbnail5.png" alt="Neovim editor"></td>
+    <td><img src="thumbnails/thumbnail6.png" alt="Rmpc music player"></td>
   </tr>
 </table>
 

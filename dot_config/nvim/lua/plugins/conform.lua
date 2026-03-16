@@ -24,6 +24,7 @@ return {
 				lua = { "stylua" },
 				cmake = { "cmakelang" },
 				odin = { "odinfmt" },
+				rust = { "rustfmt" },
 			},
 			formatters = {
 				clang_format = {
