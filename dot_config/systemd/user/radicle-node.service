@@ -1,0 +1,15 @@
+[Unit]
+Description=Radicle Node
+After=network.target
+
+[Service]
+Type=simple
+Environment=RAD_PASSPHRASE="zoya"
+ExecStart=/usr/bin/radicle-node
+Restart=on-failure
+RestartSec=5s
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=default.target

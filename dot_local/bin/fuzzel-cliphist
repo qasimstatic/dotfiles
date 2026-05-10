@@ -1,0 +1,55 @@
+#!/bin/bash
+
+# Read all entries first, then process
+declare -a entries
+while IFS= read -r line; do
+    entries+=("$line")
+done < <(cliphist list)
+
+# Build display list and ID map with unique keys
+declare -A id_map
+display_list=()
+
+for line in "${entries[@]}"; do
+    IFS=$'\t' read -r id content <<< "$line"
+    id="${id//$'\n'/}"
+
+    if [[ -z "$content" ]]; then
+        # Image - use the raw ID as label
+        label="$id"
+    else
+        # Text - truncate to 80 chars
+        label="${content:0:80}"
+        if [[ ${#content} -gt 80 ]]; then
+            label="$label..."
+        fi
+    fi
+
+    # Make labels unique to prevent id_map overwrite
+    base_label="$label"
+    counter=0
+    while [[ -n "${id_map[$label]}" ]]; do
+        label="${base_label} ($((++counter)))"
+    done
+
+    id_map["$label"]="$id"
+    display_list+=("$label")
+done
+
+# Show the list in Fuzzel
+# printf ensures each label is on a new line
+selected_label=$(printf '%s\n' "${display_list[@]}" | fuzzel -d --prompt=" ")
+
+# Exit if the user cancels
+if [ -z "$selected_label" ]; then
+    exit 0
+fi
+
+# Retrieve the real ID using the selected label
+target_id="${id_map[$selected_label]}"
+target_id="${target_id//$'\n'/}"
+
+# Decode and copy
+if [ -n "$target_id" ]; then
+    printf '%s' "$target_id" | cliphist decode | wl-copy
+fi
