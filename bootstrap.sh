@@ -20,4 +20,4 @@ fi
 paru -S --needed nushell chezmoi jujutsu
 
 echo "Bootstrap complete!"
-echo "Now run: chezmoi init --apply ssh://git@codeberg.org/qasimsk20/dotfiles.git"
+echo "Now run: chezmoi init --apply ssh://git@codeberg.org/qasimstatic/dotfiles.git"

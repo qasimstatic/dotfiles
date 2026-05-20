@@ -38,7 +38,7 @@
 
 ```bash
 # 1. Download and run bootstrap script
-curl -sS https://codeberg.org/qasimsk20/dotfiles/raw/branch/main/bootstrap.sh | bash
+curl -sS https://codeberg.org/qasimstatic/dotfiles/raw/branch/main/bootstrap.sh | bash
 
 # 2. Let chezmoi manage everything natively
 chezmoi apply
