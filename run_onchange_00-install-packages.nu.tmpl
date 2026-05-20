@@ -10,13 +10,14 @@ print "Checking for packages to install..."
 let packages_file = ($env.HOME | path join ".local/share/chezmoi/packages.txt")
 
 if ($packages_file | path exists) {
-    # Read file, trim whitespace, and ignore empty lines or comments
+    # Read file, trim whitespace, ignore empty lines, and strip inline comments
     let pkgs = (
         open $packages_file 
         | lines 
         | str trim 
         | where ($it != "") 
         | where ($it | str starts-with "#" | not $in)
+        | each { |line| $line | split row "#" | first | str trim }
     )
     
     if ($pkgs | is-empty) {
