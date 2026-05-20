@@ -53,7 +53,7 @@ pipewire-alsa
 
 # Extras
 carapace-bin
-catppuccin-sddm-theme-git
+catppuccin-sddm-theme-mocha
 oxicord
 pass
 pass-secret-service
