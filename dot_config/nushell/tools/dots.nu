@@ -12,7 +12,7 @@ export def dots-sync [] {
     chezmoi add ~/.config/waybar
     chezmoi add ~/.config/ghostty
     chezmoi add ~/.config/nushell
-    chezmoi add ~/.config/fuzzel
+    chezmoi add ~/.config/tofi
     chezmoi add ~/.config/rmpc
     chezmoi add ~/.config/starship.toml
     chezmoi add ~/.config/systemd

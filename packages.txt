@@ -8,7 +8,7 @@ vivid
 ghostty
 hyprland
 waybar
-fuzzel
+tofi
 cliphist
 wl-clipboard
 grimblast  # screenshot tool from hyprland community

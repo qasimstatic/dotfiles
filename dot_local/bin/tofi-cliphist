@@ -36,9 +36,9 @@ for line in "${entries[@]}"; do
     display_list+=("$label")
 done
 
-# Show the list in Fuzzel
+# Show the list in tofi
 # printf ensures each label is on a new line
-selected_label=$(printf '%s\n' "${display_list[@]}" | fuzzel -d --prompt=" ")
+selected_label=$(printf '%s\n' "${display_list[@]}" | tofi --prompt-text=" ")
 
 # Exit if the user cancels
 if [ -z "$selected_label" ]; then
