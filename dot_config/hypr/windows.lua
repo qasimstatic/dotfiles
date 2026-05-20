@@ -6,7 +6,7 @@
 
 hl.layer_rule({
 	name = "tofi_blur",
-	match = { namespace = "tofi" },
+	match = { namespace = "launcher" },
 	blur = true,
 })
 
