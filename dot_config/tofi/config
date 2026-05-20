@@ -1,8 +1,6 @@
-# Font
+# Font & Geometry
 font = "Monaspace Neon NF"
 font-size = 15
-
-# Window dimensions and padding
 width = 600
 height = 400
 border-width = 2
@@ -11,21 +9,21 @@ padding-top = 20
 padding-bottom = 20
 padding-left = 20
 padding-right = 20
+result-spacing = 15
+num-results = 10
 
-# Colors (Catppuccin Mocha)
+# High Contrast Catppuccin Mocha Colors
 background-color = #000000CC
+border-color = #CBA6F7
 text-color = #CDD6F4
-prompt-color = #BAC2DE
-placeholder-color = #7F849C
+prompt-color = #CBA6F7
 input-color = #CDD6F4
 selection-color = #CBA6F7
-selection-match-color = #000000
+selection-match-color = #F9E2AF
 default-result-color = #CDD6F4
 
-# Prompt
+# Prompt & Matching
 prompt-text = " "
-
-# Matching
 fuzzy-match = true
 require-match = false
 hide-cursor = false
