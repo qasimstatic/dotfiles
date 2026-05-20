@@ -39,7 +39,7 @@ dog  # DNS client
 tmux
 lazygit
 gitui
-delta  # git pager
+git-delta  # git pager
 glow  # markdown viewer
 tokei  # code statistics
 
@@ -51,10 +51,9 @@ pipewire
 pipewire-pulse
 pipewire-alsa
 
-# Extras
-carapace-bin
+
 catppuccin-sddm-theme-mocha
 oxicord
 pass
-pass-secret-service
+pass-secret-service-bin
 
