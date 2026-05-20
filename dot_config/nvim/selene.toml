@@ -1,0 +1,5 @@
+std = "vim"
+
+[lints]
+# lazy.nvim plugin specs are mixed tables by design — suppress everywhere
+mixed_table = "allow"

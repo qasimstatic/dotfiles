@@ -1,33 +1,27 @@
--- TypeScript/JavaScript: vtsls LSP, eslint linter, prettier formatter
+-- TypeScript/JavaScript: vtsls, eslint, prettier
+vim.lsp.config("vtsls", {
+	filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+	cmd = { "vtsls", "--stdio" },
+	settings = {
+		typescript = {
+			preferences = {
+				importModuleSpecifierPreference = "relative",
+			},
+			suggest = {
+				includeAutomaticOptionalChainCompletions = false,
+			},
+		},
+	},
+})
+vim.lsp.enable("vtsls")
+
+vim.lsp.config("vscode-eslint-language-server", {
+	filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+	cmd = { "vscode-eslint-language-server", "--stdio" },
+})
+vim.lsp.enable("vscode-eslint-language-server")
+
 return {
-	-- LSP: vtsls (TypeScript + JavaScript)
-	{
-		"neovim/nvim-lspconfig",
-		config = function()
-			vim.lsp.config("vtsls", {
-				settings = {
-					typescript = {
-						preferences = {
-							importModuleSpecifierPreference = "relative",
-						},
-						suggest = {
-							includeAutomaticOptionalChainCompletions = false,
-						},
-					},
-				},
-			})
-			vim.lsp.enable("vtsls")
-		end,
-	},
-	-- Linter: vscode-eslint-language-server (the clang-tidy of JS/TS)
-	{
-		"neovim/nvim-lspconfig",
-		config = function()
-			vim.lsp.config("vscode-eslint-language-server", {})
-			vim.lsp.enable("vscode-eslint-language-server")
-		end,
-	},
-	-- Formatter: prettier
 	{
 		"stevearc/conform.nvim",
 		opts = {

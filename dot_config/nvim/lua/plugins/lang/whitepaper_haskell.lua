@@ -1,6 +1,5 @@
--- Haskell: haskell-tools.nvim (wraps HLS), fourmolu formatter
+-- Haskell: haskell-tools (wraps HLS), hlint, fourmolu
 return {
-	-- LSP + tooling: haskell-language-server via haskell-tools
 	{
 		"mrcjkb/haskell-tools.nvim",
 		version = "^6",
@@ -14,7 +13,6 @@ return {
 					settings = {
 						haskell = {
 							plugin = {
-								-- Enable hlint code actions and diagnostics
 								hlint = { codeActionsOn = true, diagnosticsOn = true },
 							},
 						},
@@ -23,7 +21,6 @@ return {
 			}
 		end,
 	},
-	-- Formatter: fourmolu (4-space indent)
 	{
 		"stevearc/conform.nvim",
 		opts = {

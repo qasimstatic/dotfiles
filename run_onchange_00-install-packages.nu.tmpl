@@ -1,0 +1,39 @@
+#!/usr/bin/env nu
+
+# hash: {{ include "packages.txt" | sha256sum }}
+
+# This script runs automatically via chezmoi whenever packages.txt changes.
+# Note: chezmoi requires run_ scripts to execute successfully.
+
+print "Checking for packages to install..."
+
+let packages_file = ($env.HOME | path join ".local/share/chezmoi/packages.txt")
+
+if ($packages_file | path exists) {
+    # Read file, trim whitespace, and ignore empty lines or comments
+    let pkgs = (
+        open $packages_file 
+        | lines 
+        | str trim 
+        | where ($it != "") 
+        | where ($it | str starts-with "#" | not $in)
+    )
+    
+    if ($pkgs | is-empty) {
+        print "No packages found in packages.txt"
+        exit 0
+    }
+
+    print $"Found ($pkgs | length) packages. Installing with paru..."
+    
+    # We spread the list into arguments for paru
+    try {
+        paru -S --needed --noconfirm ...$pkgs
+        print "Package installation complete!"
+    } catch {
+        print "[ERROR] Failed to install packages via paru."
+        exit 1
+    }
+} else {
+    print "[WARNING] packages.txt not found!"
+}

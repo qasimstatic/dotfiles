@@ -1,11 +1,7 @@
-float getSdfRectangle(in vec2 p, in vec2 xy, in vec2 b)
-{
+float getSdfRectangle(in vec2 p, in vec2 xy, in vec2 b) {
     vec2 d = abs(p - xy) - b;
     return length(max(d, 0.0)) + min(max(d.x, d.y), 0.0);
 }
-
-// Based on Inigo Quilez's 2D distance functions article: https://iquilezles.org/articles/distfunctions2d/
-// Potencially optimized by eliminating conditionals and loops to enhance performance and reduce branching
 
 float seg(in vec2 p, in vec2 a, in vec2 b, inout float s, float d) {
     vec2 e = b - a;
@@ -60,33 +56,26 @@ float ease(float x) {
     return pow(1.0 - x, 3.0);
 }
 
-// Use this site to convert from HEX to vec4
-// https://enchanted.games/app/colour-converter/
-const vec4 TRAIL_COLOR = vec4(0.537, 0.706, 0.980, 1.0); // catppuccin mocha blue
-const float OPACITY = 0.6;
-const float DURATION = 0.03; //IN SECONDS
+const float OPACITY = 1.0;
+const float DURATION = 0.06; // Cut in half for 120+ WPM typing speeds
 
-void mainImage(out vec4 fragColor, in vec2 fragCoord)
-{
-
+void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     #if !defined(WEB)
     fragColor = texture(iChannel0, fragCoord.xy / iResolution.xy);
     #endif
-    // Normalization for fragCoord to a space of -1 to 1;
-    vec2 vu = normalize(fragCoord, 1.);
-    vec2 offsetFactor = vec2(-.5, 0.5);
 
-    // Normalization for cursor position and size;
-    // cursor xy has the postion in a space of -1 to 1;
-    // zw has the width and height
-    vec4 currentCursor = vec4(normalize(iCurrentCursor.xy, 1.), normalize(iCurrentCursor.zw, 0.));
-    vec4 previousCursor = vec4(normalize(iPreviousCursor.xy, 1.), normalize(iPreviousCursor.zw, 0.));
+    vec2 vu = normalize(fragCoord, 1.0);
+    vec2 offsetFactor = vec2(-0.5, 0.5);
 
-    // When drawing a parellelogram between cursors for the trail i need to determine where to start at the top-left or top-right vertex of the cursor
+    vec4 currentCursor = vec4(normalize(iCurrentCursor.xy, 1.0), normalize(iCurrentCursor.zw, 0.0));
+    vec4 rawPreviousCursor = vec4(normalize(iPreviousCursor.xy, 1.0), normalize(iPreviousCursor.zw, 0.0));
+    
+    // Shorten the trail distance slightly so it doesn't look like a rubber band dragging behind you
+    vec4 previousCursor = mix(currentCursor, rawPreviousCursor, 0.5);
+
     float vertexFactor = determineStartVertexFactor(currentCursor.xy, previousCursor.xy);
     float invertedVertexFactor = 1.0 - vertexFactor;
 
-    // Set every vertex of my parellogram
     vec2 v0 = vec2(currentCursor.x + currentCursor.z * vertexFactor, currentCursor.y - currentCursor.w);
     vec2 v1 = vec2(currentCursor.x + currentCursor.z * invertedVertexFactor, currentCursor.y);
     vec2 v2 = vec2(previousCursor.x + currentCursor.z * invertedVertexFactor, previousCursor.y);
@@ -95,19 +84,41 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
     float sdfCurrentCursor = getSdfRectangle(vu, currentCursor.xy - (currentCursor.zw * offsetFactor), currentCursor.zw * 0.5);
     float sdfTrail = getSdfParallelogram(vu, v0, v1, v2, v3);
 
-    float progress = clamp((iTime - iTimeCursorChange) / DURATION, 0.0, 1.0);
-    float easedProgress = ease(progress);
-    // Distance between cursors determine the total length of the parallelogram;
     vec2 centerCC = getRectangleCenter(currentCursor);
     vec2 centerCP = getRectangleCenter(previousCursor);
-    float lineLength = distance(centerCC, centerCP);
+    vec2 dir = centerCC - centerCP;
+    
+    float len2 = dot(dir, dir);
+    float t = 1.0;
+    if (len2 > 0.00001) {
+        t = clamp(dot(vu - centerCP, dir) / len2, 0.0, 1.0);
+    }
+    
+    float smoothT = smoothstep(0.0, 1.0, t);
+    float progress = clamp((iTime - iTimeCursorChange) / DURATION, 0.0, 1.0);
+    float currentOpacity = (1.0 - progress) * OPACITY;
 
-    vec4 newColor = vec4(fragColor);
-    // Draw trail
-    newColor = mix(newColor, TRAIL_COLOR, antialising(sdfTrail));
-    // Draw current cursor
-    newColor = mix(newColor, TRAIL_COLOR, antialising(sdfCurrentCursor));
-    newColor = mix(newColor, fragColor, step(sdfCurrentCursor, 0.));
-    // newColor = mix(fragColor, newColor, OPACITY);
-    fragColor = mix(fragColor, newColor, step(sdfCurrentCursor, easedProgress * lineLength));
+    // Catppuccin Mauve Gradient (O'Clock style transition)
+    // Head: Bright, gamma-corrected Mauve (#cba6f7) for maximum pop
+    vec4 exactMauve = vec4(0.796, 0.651, 0.969, 1.0);
+    vec4 headMauve = vec4(pow(exactMauve.rgb, vec3(2.2)), 1.0);
+    
+    // Tail: A deeper, darker purple to create the "comet tail" depth
+    vec4 tailPurple = vec4(0.3, 0.1, 0.5, 1.0);
+    
+    // Smooth blend from Dark Purple at the tail to Bright Mauve at the head
+    vec4 trailColor = mix(tailPurple, headMauve, smoothT);
+    
+    // The perfect comet beam fadeout
+    float trailAlpha = antialising(sdfTrail) * smoothT * currentOpacity;
+    
+    // Head starts bright Mauve and cools to dark Purple
+    vec4 headColor = mix(headMauve, tailPurple, progress);
+    float headAlpha = antialising(sdfCurrentCursor) * currentOpacity;
+
+    vec4 newColor = fragColor;
+    newColor = mix(newColor, trailColor, trailAlpha);
+    newColor = mix(newColor, headColor, headAlpha);
+
+    fragColor = newColor;
 }

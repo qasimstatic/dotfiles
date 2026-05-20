@@ -56,4 +56,4 @@ if not ($node_paths | is-empty) {
 }
 
 # Opencode
-$env.OPENCODE_ENABLE_EXA = true
+$env.OPENCODE_ENABLE_EXA = "true"

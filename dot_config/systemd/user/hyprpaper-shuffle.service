@@ -1,0 +1,11 @@
+[Unit]
+Description=Shuffle Hyprpaper wallpaper
+After=graphical-session.target
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/hyprpaper-shuffle
+Environment=XDG_RUNTIME_DIR=%t
+
+[Install]
+WantedBy=graphical-session.target

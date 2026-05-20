@@ -40,10 +40,10 @@ return {
 			vim.api.nvim_set_hl(0, "DapStopped", { fg = "#a6e3a1", bg = "none" })
 
 			-- Sign definitions
-			vim.fn.sign_define("DapBreakpoint", { text = "●", texthl = "DapBreakpoint" })
-			vim.fn.sign_define("DapBreakpointCondition", { text = "●", texthl = "DapBreakpoint" })
-			vim.fn.sign_define("DapLogPoint", { text = "◆", texthl = "DapLogPoint" })
-			vim.fn.sign_define("DapStopped", { text = "▶", texthl = "DapStopped", linehl = "Visual" })
+			vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DapBreakpoint" })
+			vim.fn.sign_define("DapBreakpointCondition", { text = "", texthl = "DapBreakpoint" })
+			vim.fn.sign_define("DapLogPoint", { text = "", texthl = "DapLogPoint" })
+			vim.fn.sign_define("DapStopped", { text = "", texthl = "DapStopped", linehl = "Visual" })
 		end,
 	},
 	{

@@ -63,34 +63,32 @@ float ease(float x) {
 // Use this site to convert from HEX to vec4
 // https://enchanted.games/app/colour-converter/
 // const vec4 TRAIL_COLOR = vec4(1., 1., 0., 1.0); // yellow
-const vec4 TRAIL_COLOR = vec4(0.537, 0.706, 0.980, 1.0); // catppuccin blue
+// const vec4 TRAIL_COLOR = vec4(0.537, 0.706, 0.980, 1.0); // catppuccin blue
 // const vec4 TRAIL_COLOR = vec4(0.914, 0.702, 0.992, 1.0); // light cursor
-// const vec4 TRAIL_COLOR = vec4(0.016, 0.82, 0.976, 1.0); // cyan
-// const vec4 TRAIL_COLOR = vec4(0.216, 0.957, 0.6, 1.0); // green
-const float OPACITY = 0.6;
-const float DURATION = 0.10; //IN SECONDS
+const vec4 TRAIL_COLOR = vec4(1.0, 0.2, 0.0, 1.0); // Legacy variable, not used directly anymore
+const float OPACITY = 1.0;
+const float DURATION = 0.08; // Restored to the snappy fast duration
 
 void mainImage(out vec4 fragColor, in vec2 fragCoord)
 {
-
     #if !defined(WEB)
     fragColor = texture(iChannel0, fragCoord.xy / iResolution.xy);
     #endif
-    // Normalization for fragCoord to a space of -1 to 1;
+
     vec2 vu = normalize(fragCoord, 1.);
     vec2 offsetFactor = vec2(-.5, 0.5);
 
-    // Normalization for cursor position and size;
-    // cursor xy has the postion in a space of -1 to 1;
-    // zw has the width and height
     vec4 currentCursor = vec4(normalize(iCurrentCursor.xy, 1.), normalize(iCurrentCursor.zw, 0.));
-    vec4 previousCursor = vec4(normalize(iPreviousCursor.xy, 1.), normalize(iPreviousCursor.zw, 0.));
+    vec4 rawPreviousCursor = vec4(normalize(iPreviousCursor.xy, 1.), normalize(iPreviousCursor.zw, 0.));
 
-    // When drawing a parellelogram between cursors for the trail i need to determine where to start at the top-left or top-right vertex of the cursor
+    // SHORTEN THE TRAIL: Pull the previous cursor position much closer to the current cursor
+    // 0.2 means the trail will only be 20% of the actual distance traveled.
+    vec4 previousCursor = mix(currentCursor, rawPreviousCursor, 0.2);
+
+    // Determine trail vertices (straight parallelogram)
     float vertexFactor = determineStartVertexFactor(currentCursor.xy, previousCursor.xy);
     float invertedVertexFactor = 1.0 - vertexFactor;
 
-    // Set every vertex of my parellogram
     vec2 v0 = vec2(currentCursor.x + currentCursor.z * vertexFactor, currentCursor.y - currentCursor.w);
     vec2 v1 = vec2(currentCursor.x + currentCursor.z * invertedVertexFactor, currentCursor.y);
     vec2 v2 = vec2(previousCursor.x + currentCursor.z * invertedVertexFactor, previousCursor.y);
@@ -99,19 +97,47 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
     float sdfCurrentCursor = getSdfRectangle(vu, currentCursor.xy - (currentCursor.zw * offsetFactor), currentCursor.zw * 0.5);
     float sdfTrail = getSdfParallelogram(vu, v0, v1, v2, v3);
 
-    float progress = clamp((iTime - iTimeCursorChange) / DURATION, 0.0, 1.0);
-    float easedProgress = ease(progress);
-    // Distance between cursors determine the total length of the parallelogram;
+    // Calculate projection of current pixel onto the motion path to create a gradient
     vec2 centerCC = getRectangleCenter(currentCursor);
     vec2 centerCP = getRectangleCenter(previousCursor);
-    float lineLength = distance(centerCC, centerCP);
+    vec2 dir = centerCC - centerCP;
+    float len2 = dot(dir, dir);
+    float t = 1.0;
+    if (len2 > 0.00001) {
+        t = clamp(dot(vu - centerCP, dir) / len2, 0.0, 1.0);
+    }
+    
+    // Delayed fadeout: Instead of immediately dimming linearly, it stays near 100% opaque 
+    // for most of the duration, then sharply drops to 0 at the very end.
+    float progress = clamp((iTime - iTimeCursorChange) / DURATION, 0.0, 1.0);
+    float currentOpacity = (1.0 - pow(progress, 4.0)) * OPACITY;
 
+    // Catppuccin Green Theme
+    vec4 c_head  = vec4(0.651, 0.890, 0.631, 1.0); // Green (#a6e3a1)
+    vec4 c_mid   = vec4(0.651, 0.890, 0.631, 1.0); // Green (#a6e3a1)
+    vec4 c_tail  = vec4(0.651, 0.890, 0.631, 1.0); // Green (#a6e3a1)
+    vec4 c_spark = vec4(0.937, 0.894, 0.961, 1.0); // Text / Spark
+
+    // Electric Spark Effect (Lowered frequency for smoother, wider flowing arcs)
+    float spark = pow(max(0.0, sin(t * 20.0 - iTime * 60.0) * cos(t * 30.0 + iTime * 50.0)), 2.0);
+
+    // Flowing gradient: Tail -> Mid -> Head (prevents color banding/blockiness)
+    vec4 trailColor = mix(mix(c_tail, c_mid, clamp(t * 2.0, 0.0, 1.0)), c_head, clamp((t - 0.5) * 2.0, 0.0, 1.0));
+    
+    // Add smooth electrical arcs on top
+    trailColor = mix(trailColor, c_spark, spark * 0.5); 
+    
+    // Spatial fade: Removed the '* t' multiplication here so the trail is SOLID instead of mostly transparent at the tail
+    float trailAlpha = antialising(sdfTrail) * currentOpacity;
+
+    // Cursor head starts hot and cools down to the tail color over time
+    vec4 headColor = mix(c_head, c_tail, progress);
+    float headAlpha = antialising(sdfCurrentCursor) * currentOpacity;
+
+    // Smoothly mix everything
     vec4 newColor = vec4(fragColor);
-    // Draw trail
-    newColor = mix(newColor, TRAIL_COLOR, antialising(sdfTrail));
-    // Draw current cursor
-    newColor = mix(newColor, TRAIL_COLOR, antialising(sdfCurrentCursor));
-    newColor = mix(newColor, fragColor, step(sdfCurrentCursor, 0.));
-    // newColor = mix(fragColor, newColor, OPACITY);
-    fragColor = mix(fragColor, newColor, step(sdfCurrentCursor, easedProgress * lineLength));
+    newColor = mix(newColor, trailColor, trailAlpha); // Draw the gradient comet trail
+    newColor = mix(newColor, headColor, headAlpha);   // Draw the head on top
+
+    fragColor = newColor;
 }

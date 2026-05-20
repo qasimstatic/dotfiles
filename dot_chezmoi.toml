@@ -1,9 +1,14 @@
 [data]
     email = "qasim@codeberg.org"
 
+# You can add custom variables here, e.g., theme = "mocha"
+
 [source]
     type = "file"
     path = "~/.local/share/chezmoi"
+    # Note: Chezmoi natively supports git, but since we are using jj:
+    # We will manage the repo manually with jj in ~/.local/share/chezmoi
+    # Chezmoi will still track diffs based on the file system state.
 
 [diff]
     exclude = [

@@ -1,5 +1,2 @@
--- WakaTime: automatic coding time tracking
-return {
-  "wakatime/vim-wakatime",
-  lazy = false,
-}
+-- WakaTime: disabled (was causing delayed :wq)
+return {}

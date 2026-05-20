@@ -143,7 +143,7 @@ alias ts   = tmux-sessionizer
 alias oc   = opencode
 alias co   = copilot
 alias todo = taskwarrior-tui
-alias sync-dots = bash -c "find ~/.config -type f \\( -name '*.lua' -o -name '*.conf' -o -name '*.json' -o -name '*.ron' -o -name '*.toml' -o -name '*.ini' \\) -exec chmod -x {} \\; && chezmoi add ~/.config/{hypr,nvim,waybar,ghostty,nushell,fuzzel,rmpc,systemd} ~/.config/starship.toml && cd ~/.local/share/chezmoi && git add -A && git commit -m 'sync: update dotfiles' && git push"
+alias sync-dots = dots-push
 
 # ----- Git -----
 alias g    = git

@@ -1,22 +1,17 @@
--- C/C++: clangd LSP, clang_format formatter, codelldb debugger
-return {
-	-- LSP: clangd
-	{
-		"neovim/nvim-lspconfig",
-		config = function()
-			vim.lsp.config("clangd", {
-				cmd = {
-					"clangd",
-					"--background-index",
-					"--clang-tidy",
-					"--offset-encoding=utf-16",
-					"--query-driver=/usr/bin/c++,/usr/bin/gcc,/usr/bin/clang++",
-				},
-			})
-			vim.lsp.enable("clangd")
-		end,
+-- C/C++: clangd (with clang-tidy), clang_format, codelldb
+vim.lsp.config("clangd", {
+	filetypes = { "c", "cpp" },
+	cmd = {
+		"clangd",
+		"--background-index",
+		"--clang-tidy",
+		"--offset-encoding=utf-16",
+		"--query-driver=/usr/bin/c++,/usr/bin/gcc,/usr/bin/clang++",
 	},
-	-- Formatter: clang_format (Allman braces, LLVM style)
+})
+vim.lsp.enable("clangd")
+
+return {
 	{
 		"stevearc/conform.nvim",
 		opts = {
@@ -27,13 +22,12 @@ return {
 			formatters = {
 				clang_format = {
 					prepend_args = {
-						"--style={BasedOnStyle: llvm, IndentWidth: 4, BreakBeforeBraces: Allman}",
+						"--style={BasedOnStyle: llvm, IndentWidth: 4, BreakBeforeBraces: Custom, BraceWrapping: {AfterControlStatement: false, BeforeElse: true, BeforeCatch: true}, AllowShortIfStatementsOnASingleLine: true, AllowShortLoopsOnASingleLine: true, PointerAlignment: Left, AccessModifierOffset: -4, PackConstructorInitializers: Never, SpaceBeforeParens: ControlStatements, AlwaysBreakTemplateDeclarations: Yes}",
 					},
 				},
 			},
 		},
 	},
-	-- Debugger: codelldb — registered when opening C/C++ files
 	{
 		"mfussenegger/nvim-dap",
 		opts = function()

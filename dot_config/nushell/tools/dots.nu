@@ -48,7 +48,7 @@ export def dots-push [] {
 }
 
 # Open chezmoi source directory
-export def dots-cd [] {
+export def --env dots-cd [] {
     cd ~/.local/share/chezmoi
 }
 

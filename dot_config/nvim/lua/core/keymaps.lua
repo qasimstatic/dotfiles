@@ -21,3 +21,7 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
 vim.keymap.set("n", "<leader>h", ":nohlsearch<CR>", { desc = "Clear search highlights" })
+
+-- Exit
+vim.keymap.set("n", "<C-e>", ":qa!<CR>", { desc = "Exit Neovim" })
+vim.keymap.set("n", "<C-s>", ":wa!<CR>", { desc = "Write Unsaved" })

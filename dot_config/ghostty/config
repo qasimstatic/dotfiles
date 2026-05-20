@@ -6,13 +6,13 @@ background-opacity = 0.80
 background = #000000
 
 gtk-custom-css = ?"~/.config/ghostty/overrides.css"
-# custom-shader = shaders/cursor_smear.glsl
 
 # =============================================================================
 # Fonts
 # =============================================================================
 font-family = Monaspace Neon NF SemiBold
 # font-family-italic = Monaspace Radon NF SemiBold
+
 
 font-size = 14
 font-feature = "ss01,ss02,ss03,ss04,ss05,ss06,ss07,ss08,ss09,liga,calt"
@@ -51,6 +51,7 @@ mouse-hide-while-typing = true
 # =============================================================================
 keybind = shift+insert=paste_from_clipboard
 keybind = control+insert=copy_to_clipboard
+keybind = ctrl+enter=unbind
 keybind = shift+enter=text:\x1b\r
 
 keybind = super+control+shift+alt+arrow_down=resize_split:down,100

@@ -9,3 +9,8 @@ nvim env.nu
 hyprlock
 ls
 rmpc
+z nushell
+ls
+cd ~/.config/nushell
+ls
+pi

@@ -1,11 +1,10 @@
--- Rust: rustaceanvim (wraps rust-analyzer + DAP), rustfmt formatter, clippy lints
+-- Rust: rustaceanvim (wraps rust-analyzer + DAP), clippy, rustfmt
 return {
 	{
 		"mrcjkb/rustaceanvim",
 		version = "^8",
 		ft = { "rust" },
 		init = function()
-			-- Use clippy instead of cargo check for diagnostics
 			vim.g.rustaceanvim = {
 				server = {
 					default_settings = {
@@ -24,7 +23,6 @@ return {
 			}
 		end,
 	},
-	-- Formatter: rustfmt
 	{
 		"stevearc/conform.nvim",
 		opts = {

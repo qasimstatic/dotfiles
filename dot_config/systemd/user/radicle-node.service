@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 Type=simple
-Environment=RAD_PASSPHRASE="zoya"
+EnvironmentFile=%h/.config/radicle-node.env
 ExecStart=/usr/bin/radicle-node
 Restart=on-failure
 RestartSec=5s

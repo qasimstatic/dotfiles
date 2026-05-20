@@ -1,11 +1,9 @@
--- Odin: ols LSP (basic type-checking and diagnostics)
+-- Odin: ols
 -- NOTE: ols is not in mason. Install via: git clone https://github.com/DanielGavin/ols && cd ols && odin build . -out:~/bin/ols
-return {
-	{
-		"neovim/nvim-lspconfig",
-		config = function()
-			vim.lsp.config("ols", {})
-			vim.lsp.enable("ols")
-		end,
-	},
-}
+vim.lsp.config("ols", {
+	filetypes = { "odin" },
+	cmd = { "ols" },
+})
+vim.lsp.enable("ols")
+
+return {}
