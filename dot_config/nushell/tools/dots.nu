@@ -20,21 +20,19 @@ export def dots-sync [] {
     print "Done."
 }
 
-# Show git status in chezmoi directory
+# Show jj status in chezmoi directory
 export def dots-status [] {
     cd ~/.local/share/chezmoi
-    git status --short
+    jj status
 }
 
-# Sync and commit all changes with date
+# Sync and snapshot changes (jj auto-snapshots, but we can set a desc)
 export def dots-commit [] {
     dots-sync
     
     cd ~/.local/share/chezmoi
-    git add -A
-    
     let date = (date now | format date "%d/%m/%y")
-    git commit -m $"sync ($date)"
+    jj commit -m $"sync ($date)"
     
     print $"Committed: sync ($date)"
 }
@@ -43,7 +41,7 @@ export def dots-commit [] {
 export def dots-push [] {
     dots-commit
     cd ~/.local/share/chezmoi
-    git push
+    jj git push
     print "Pushed."
 }
 
@@ -63,16 +61,15 @@ export def dots-apply [] {
     print "Applied."
 }
 
-# Stage specific files for commit
+# Stage specific files (not heavily used in jj, but maps to jj new)
 export def dots-stage [...files: string] {
     cd ~/.local/share/chezmoi
-    git add ...$files
-    print $"Staged: ($files | str join ' ')"
+    print "In jj, everything is tracked automatically. Use jj squash or jj describe instead."
 }
 
-# Commit staged changes
+# Commit specific message
 export def "dots-commit-partial" [message: string] {
     cd ~/.local/share/chezmoi
-    git commit -m $message
+    jj commit -m $message
     print $"Committed: ($message)"
 }

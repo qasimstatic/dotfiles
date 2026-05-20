@@ -37,16 +37,11 @@
 ## Installation
 
 ```bash
-# 1. Clone and run install script
-git clone ssh://git@codeberg.org/qasimsk20/dotfiles.git ~/dotfiles
-cd ~/dotfiles
-./install.sh
+# 1. Download and run bootstrap script
+curl -sS https://codeberg.org/qasimsk20/dotfiles/raw/branch/main/bootstrap.sh | bash
 
-# 2. System configs (requires sudo)
-sudo ./system-setup.sh
-
-# 3. Reboot
-reboot
+# 2. Let chezmoi manage everything natively
+chezmoi apply
 ```
 
 ## Overview
