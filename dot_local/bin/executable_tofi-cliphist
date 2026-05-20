@@ -37,8 +37,9 @@ for line in "${entries[@]}"; do
 done
 
 # Show the list in tofi
-# printf ensures each label is on a new line
-selected_label=$(printf '%s\n' "${display_list[@]}" | tofi --prompt-text=" ")
+# printf ensures each label is on a new line. 
+# We use --require-match=true so it enforces picking an actual clipboard entry.
+selected_label=$(printf '%s\n' "${display_list[@]}" | tofi --prompt-text=" " --require-match=true)
 
 # Exit if the user cancels
 if [ -z "$selected_label" ]; then
