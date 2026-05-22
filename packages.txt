@@ -44,6 +44,8 @@ glow  # markdown viewer
 tokei  # code statistics
 
 # System Tools
+zathura
+zathura-pdf-mupdf
 brightnessctl
 pamixer  # pulseaudio mixer
 wireplumber
