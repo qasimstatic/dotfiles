@@ -7,22 +7,25 @@
     "passthrough": false,
     "fixed-center": true,
     "modules-left": [
-        "hyprland/workspaces",
         "hyprland/window"
     ],
     "modules-center": [
-        "clock"
+        "hyprland/workspaces",
     ],
     "modules-right": [
         "tray",
         "network",
         "pulseaudio",
         "backlight",
+        "battery",
+        "clock"
     // "cpu",
     // "memory",
-    "battery"
     ],
     "hyprland/workspaces": {
+        "persistent-workspaces": {
+            "*": 3,               // Always show 5 workspaces on every monitor
+        },
         "on-click": "activate",
         "format": "{id}",
         "all-outputs": true,
@@ -30,7 +33,7 @@
         "active-only": false
     },
     "hyprland/window": {
-        "format": "{title}"
+        "format": "{initialTitle}"
     },
     "clock": {
         "tooltip": true,

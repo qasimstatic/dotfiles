@@ -9,7 +9,6 @@
 }
 
 window#waybar {
-  font-family: MonaspiceRn NFP;
   /* background-color: transparent; */
   background-color: rgba(0, 0, 0, 0.8);
 }
@@ -65,7 +64,6 @@ window#waybar {
 }
 
 #clock {
-  font-family: MonaspiceRn NFP;
   background-color: @rosewater;
 }
 

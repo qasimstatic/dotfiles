@@ -128,5 +128,4 @@ hl.window_rule({
 hl.window_rule({
 	name = "zathura",
 	match = { class = "org.pwmt.zathura" },
-	fullscreen = true,
 })

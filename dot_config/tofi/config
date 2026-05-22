@@ -1,7 +1,7 @@
 # Font & Geometry
 font = "Monaspace Neon NF"
-font-size = 15
-width = 420
+font-size = 18
+width = 500
 height = 400
 border-width = 2
 outline-width = 0

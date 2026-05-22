@@ -27,10 +27,6 @@ if ($systemd_dir | path exists) {
         }
     }
     
-    # Explicit timers/services not captured by the generic symlink logic
-    print "Enabling hyprpaper-shuffle timer..."
-    try { systemctl --user enable --now hyprpaper-shuffle.timer }
-    
     try { systemctl --user enable --now pass-secret-service.service }
 }
 
