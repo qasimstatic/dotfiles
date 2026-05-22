@@ -15,3 +15,11 @@ env.nu
 *_secret*
 credentials.*
 api_keys.*
+
+# Repository Management Files
+README.md
+bootstrap.sh
+packages.txt
+thumbnails/
+run_*.nu*
+

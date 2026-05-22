@@ -1,8 +1,8 @@
 # Font & Geometry
 font = "Monaspace Neon NF"
-font-size = 18
+font-size = 16
 width = 500
-height = 400
+height = 250
 border-width = 2
 outline-width = 0
 padding-top = 20
@@ -10,7 +10,7 @@ padding-bottom = 20
 padding-left = 20
 padding-right = 20
 result-spacing = 15
-num-results = 10
+num-results = 4
 
 # High Contrast Catppuccin Mocha Colors
 background-color = #000000CC
