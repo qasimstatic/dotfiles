@@ -1,2 +1,1 @@
--- WakaTime: disabled (was causing delayed :wq)
-return {}
+return { "wakatime/vim-wakatime", lazy = false }
