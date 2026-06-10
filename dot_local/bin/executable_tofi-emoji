@@ -1,0 +1,3 @@
+#!/bin/bash
+# Wrapper to make bemoji use tofi
+BEMOJI_PICKER_CMD='tofi --prompt-text="󰞅  " --require-match=true' bemoji -t

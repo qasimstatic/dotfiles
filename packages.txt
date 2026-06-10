@@ -47,6 +47,8 @@ tokei  # code statistics
 zathura
 zathura-pdf-mupdf
 brightnessctl
+wtype
+bemoji
 pamixer  # pulseaudio mixer
 wireplumber
 pipewire

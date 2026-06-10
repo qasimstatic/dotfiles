@@ -25,6 +25,7 @@ hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("voxtype record stop"), { release = t
 -- -------------------------
 hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd(apps.menu))
 hl.bind(mainMod .. " + V", hl.dsp.exec_cmd("tofi-cliphist"))
+hl.bind(mainMod .. " + period", hl.dsp.exec_cmd("tofi-emoji"))
 hl.bind(mainMod .. " + L", hl.dsp.exec_cmd(apps.lock))
 
 -- Screenshots
