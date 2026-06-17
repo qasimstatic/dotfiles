@@ -1,0 +1,20 @@
+:root{
+--ctp-base:#000000;--ctp-mantle:#000000;--ctp-crust:#000000;--ctp-text:#cdd6f4;--ctp-mauve:#cba6f7;--ctp-green:#a6e3a1;
+--zen-border-radius:0px;--border-radius-small:0;--border-radius-medium:0;--border-radius-large:0;
+--toolbarbutton-border-radius:0;--tab-border-radius:0;--arrowpanel-border-radius:0;--panel-border-radius:0;
+--lwt-accent-color:#000000;--lwt-text-color:#cdd6f4;--toolbar-bgcolor:#000000;--toolbar-color:#cdd6f4;
+--lwt-selected-tab-background-color:#a6e3a1;--lwt-toolbar-field-background-color:#000000;
+--sidebar-background-color:#000000;--sidebar-text-color:#cdd6f4;
+}
+*{border-radius:0!important;border-start-start-radius:0!important;border-start-end-radius:0!important;border-end-start-radius:0!important;border-end-end-radius:0!important}
+#zen-appcontent-wrapper,#tabbrowser-tabpanels,.browserSidebarContainer,#zen-main-app-wrapper,#zen-sidebar-splitter,.zen-workspace-tabs,#urlbar-background,#searchbar,menupopup,panel,tooltip{border-radius:0!important;margin:0!important;box-shadow:none!important}
+:root[zen-compact-mode="true"] #zen-appcontent-wrapper{padding:0!important}
+.tabbrowser-tab .tab-background{background-image:none!important;transition:none!important;opacity:1!important}
+.tabbrowser-tab[selected="true"] .tab-background,.tabbrowser-tab[visuallyselected="true"] .tab-background{background-color:#a6e3a1!important}
+.tabbrowser-tab:not([selected="true"]):not([visuallyselected="true"]) .tab-background{background-color:#cba6f7!important}
+.tabbrowser-tab .tab-label,.tabbrowser-tab .tab-text{color:#000000!important;font-weight:600!important;opacity:1!important}
+.tabbrowser-tab:not([selected]):hover .tab-background{filter:brightness(1.1)!important}
+#navigator-toolbox,#zen-sidebar,#zen-workspaces-button{background-color:#000000!important;color:#cdd6f4!important;border:none!important}
+#urlbar-background{background-color:#000000!important;border:1px solid #cba6f7!important}
+.tabbrowser-tab{padding:0!important;margin:0!important}
+.tab-stack{margin:0!important}
